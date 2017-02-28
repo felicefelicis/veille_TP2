@@ -4,10 +4,10 @@ var fs = require("fs");
 
 var user = {
    "user4" : {
-      "nom" : "Sestier",
-      "motpass" : "motpasse4",
-      "profession" : "Ingénieur",
-      "id": 4
+      "nom" : "Remus Lupin",
+      "motpass" : "loupgarou",
+      "profession" : "Professeur de Défence contre les forces du mal",
+      "id": 5
    }
 }
 
@@ -16,11 +16,11 @@ var user = {
 
 
 
-app.get('___________', function (req, res) {
+app.get('/ajouter', function (req, res) {
    // On récupere l'usagers 4.
    var monUtilisateur = JSON.stringify(user["user4"])
    // on l'ajoute au fichier
-   fs.appendFile( __dirname + "____________" + "usagers.json",_______________,  'utf8', function (err) {
+   fs.appendFile( __dirname + "/public/data/" + "usagers.json", monUtilisateur,  'utf8', function (err) {
 
        console.log( monUtilisateur );
        // res.end( JSON.stringify(data));

@@ -3,10 +3,10 @@ var app = express();
 var fs = require("fs");
 app.use(express.static('public'));
 
-app.get('___________', function (req, res) {
-   fs.readFile( __dirname + "/___________/" + "usagers.json", 'utf8', function (err, data) {
+app.get('/list', function (req, res) {
+   fs.readFile( __dirname + "/public/data/" + "usagers.json", 'utf8', function (err, data) {
        console.log( data );
-       res.end(____________);
+       res.end(data);
    });
 })
 

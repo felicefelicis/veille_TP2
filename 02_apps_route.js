@@ -1,12 +1,12 @@
-var express = require('______________');
-var app = ________________();
+var express = require('express');
+var app = express();
 
  
 
 // Cette route répond à une requête POST pour la page d'accueil
-app.post('___________', function (______, ________) {
+app.post('/', function (req, res) {
    console.log("Reçu une requête POST pour la page d'accueil");
-   res.__________('Hello POST');
+   res.send('Hello POST');
 })
 // Cette route répond : "Hello World" sur la page d'accueil
 // Le parametre req est l'objet request
@@ -24,13 +24,13 @@ app.delete('/del_user', function (req, res) {
 })
 
 // Cette route répond à une requête GET pour la page  /list_user page.
-app.get('/_______', function (req, res) {
+app.get('/list_user', function (req, res) {
    console.log("Reçu une requête GET pour la page /list_user");
    res.send('Page list');
 })
 
-// Cette route répond à une requête GET pour abcd, abxcd, ab123cd, et tous les autres chemins acceptés par la regExp: ab*cd
-app.get('___________', function(req, res) {   
+// Cette route à une requête GET pour abcd, abxcd, ab123cd, et tous les autres chemins acceptés par la regExp: ab*cd
+app.get('/ab*cd/:id ', function(req, res) {   
    console.log("Reçu une requête  for /ab*cd");
    console.log('__dirname = ' + __dirname);
    res.send('Page accepté par la regExp : ab*cd');

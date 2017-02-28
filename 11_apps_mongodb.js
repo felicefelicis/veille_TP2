@@ -1,14 +1,14 @@
 const express = require('express');
-const bodyParser= require('___________')
-const MongoClient = require('___________').MongoClient
+const bodyParser= require('body-parser')
+const MongoClient = require('mongodb').MongoClient
 const app = express();
-app.set('view engine', '______________'); // générateur de template «ejs»
+app.set('view engine', 'ejs'); // générateur de template «ejs»
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static('public'))  // pour utiliser le dossier public
 
 var db // variable qui contiendra le lien sur la BD
 
-MongoClient.connect('mongodb://______________', (err, database) => {
+MongoClient.connect('mongodb://<dbuser>:<dbpassword>@ds047146.mlab.com:47146/carnet', (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(8081, () => {
@@ -23,11 +23,11 @@ MongoClient.connect('mongodb://______________', (err, database) => {
 app.get('/',  (req, res) => {
    console.log('la route route get / = ' + req.url)
  
-    var cursor = db.collection('adresse').__________()._____________(function(err, resultat){
+    var cursor = db.collection('adresse').find().toArray(function(err, resultat){
        if (err) return console.log(err)
     // renders index.ejs
     // affiche le contenu de la BD
-    res.render('____________', {___________: _______________})
+    res.render('index.ejs', {adresse: resultat})
 
     }) 
     
@@ -35,17 +35,17 @@ app.get('/',  (req, res) => {
 })
 
 
-app.get('________________',  (req, res) => {
+app.get('/formulaire',  (req, res) => {
    console.log('la route  get / = ' + req.url)
-   res.sendFile(__dirname + "_____________")
+   res.sendFile(__dirname + "/public/html/forme.htm")
 })
 
 
-app.post('______________',  (req, res) => {
-  db.collection('adresse').__________(req.____________, (err, result) => {
+app.post('/adresse',  (req, res) => {
+  db.collection('adresse').save(req.body, (err, result) => {
       if (err) return console.log(err)
       console.log('sauvegarder dans la BD')
-      res.redirect('___________________')
+      res.redirect('/')
     })
 })
 

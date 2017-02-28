@@ -1,14 +1,14 @@
-var express = require('________________');
-var app = ___________________();
+var express = require('express');
+var app = express();
 
-app.get('/', function (________, ____________) {
-   res.____________('Hello World');
+app.get('/', function (reg, res) {
+   res.send('<h1>Hello World</h1>');
 })
 
-var server = app.______________(8081, function () {
-	// for (var p in _____________) {console.log(_________)}
-   var host = server.address()._______
-   var port = server.address()._____________
+var server = app.listen(8081, function () {
+	// for (var p in adress) {console.log(p)}
+   var host = server.address().address
+   var port = server.address().port
    
    console.log("Exemple l'application écoute sur http://%s:%s", host, port)
 })

@@ -4,17 +4,17 @@ var fs = require("fs");
 
 
 
-app.get('_____________', function (req, res) {
+app.get('/delete/:id', function (req, res) {
 
 	console.log('le dossier racine = ' + __dirname)
    // First read existing users.
-   fs.readFile( __dirname + "____________" + "usagers.json", 'utf8', function (err, data) {
+   fs.readFile( __dirname + "/public/data/" + "usagers.json", 'utf8', function (err, data) {
        
        data = JSON.parse( data );
-       delete data["user" + ______________];
+       delete data["user" + req.param.id];
        
-       console.log( ____________ );
-       res.end( JSON.stringify(_______________));
+       console.log( data );
+       res.end( JSON.stringify(data));
    });
 })
 

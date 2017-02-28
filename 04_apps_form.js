@@ -3,32 +3,33 @@ var app = express();
 
 
 app.use(express.static('public'));
-app.get('______________', function (req, res) {
+/*route qui permet d'afficher le formulaire*/
+app.get('/html/04_form.htm', function (req, res) {
    console.log(__dirname);
-   res.sendFile( __dirname + "______________" + "04_form.htm" );
+   res.sendFile( __dirname + "/" + "04_form.htm" );
 })
 
-app.get('___________', (req, res) => {
+app.get('/', (req, res) => {
    console.log('accueil')
    res.end('<h1>Accueil</h1>')
 })
 
-app.get('_________________', function (req, res) {
+app.get('/traiter_get', function (req, res) {
    // Preparer l'output en format JSON 
 
    console.log('la route /traiter_get')
 
    // on utilise l'objet req.query pour récupérer les données GET
    reponse = {
-      prenom:req._______._________,
-      nom:req.________.______________
+      prenom:req.query.prenom,
+      nom:req.query.nom
    };
 
 
    console.log(reponse);
 
    
-   res.end(JSON._______________(_____________));
+   res.end(JSON.stringify(reponse));
 })
 
 

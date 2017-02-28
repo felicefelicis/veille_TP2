@@ -1,9 +1,9 @@
 var express = require('express');
 var app = express();
 // on défini le chemin du dossier «public» on aura pas besoin de spécifier «public» dans l'url
-app.use(express.static('______________'));
+app.use(express.static('public'));
 
-app.get('_____________', function (req, res) {
+app.get('/', function (req, res) {
    res.send('Hello World');
 })
 

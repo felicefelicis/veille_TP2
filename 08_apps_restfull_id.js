@@ -2,11 +2,11 @@ var express = require('express');
 var app = express();
 var fs = require("fs");
 /* on sélectionne un usager en particulier */
-app.get('_________________', function (req, res) {
+app.get('/:id', function (req, res) {
    // Premièrement on lit l'ensemble des usagers.
    fs.readFile( __dirname + "/public/data/" + "usagers.json", 'utf8', function (err, data) {
        users = JSON.parse( data );
-       var user = users["user" + req.params.________] 
+       var user = users["user" + req.params.id] 
        console.log( user );
        res.end( JSON.stringify(user));
    });

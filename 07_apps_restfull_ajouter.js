@@ -11,14 +11,14 @@ var user = {
    }
 }
 
-app.get('____________', function (req, res) {
+app.get('/ajouter', function (req, res) {
    // On récupere la liste des usagers.
    fs.readFile( __dirname + "/public/data/" + "usagers.json", 'utf8', function (err, data) {
        console.log( data );
        data = JSON.parse( data );
-       data["user4"] = user[___________];
-       console.log( ____________);
-       res.end( JSON.stringify(____________));
+       data["user4"] = user["user4"];
+       console.log( data);
+       res.end( JSON.stringify(data));
    });
 })
 
