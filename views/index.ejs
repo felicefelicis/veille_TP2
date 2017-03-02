@@ -9,7 +9,10 @@
   <button id='update'>Mise à jour téléphone</button>
     <form action="/adresse" method="POST">
     <input type="text" placeholder="nom" name="nom">
-    <input type="text" placeholder="Telephone" name="telephone">
+    <input type="text" placeholder="prenom" name="prenom">
+    <input type="text" placeholder="telephone" name="telephone">
+    <input type="text" placeholder="ville" name="ville">
+    <input type="text" placeholder="code postal" name="codepostal">
     <button type="submit">Submit</button>
   </form>
 
@@ -17,7 +20,10 @@
   <% for(var i=0; i<adresse.length; i++) {%>
     <li class="client">
       <span><%= adresse[i].nom %></span>
+      <span><%= adresse[i].prenom %></span>
       <span><%= adresse[i].telephone %></span>
+      <span><%= adresse[i].ville %></span>
+      <span><%= adresse[i].codepostal %></span>
     </li>
   <% } %>
   </ul>
