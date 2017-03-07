@@ -53,8 +53,7 @@ app.get('/detruire/:_id',  (req, res) => {
        if (err) return console.log(err)
     // renders index.ejs
     // affiche le contenu de la BD
-    res.render('index.ejs', {adresse: resultat})
-
+    res.redirect('/');
     }) 
   }) 
 })
@@ -69,7 +68,6 @@ app.get('/modifier',  (req, res) => {
     // affiche le contenu de la BD
     console.log(req.url.slice(-1));
     res.render('index1.ejs', {adresse: resultat, id:req.url.slice(-1)})
-    console.log("id" + id);
     }) 
 })
 
@@ -82,8 +80,8 @@ app.post('/enregistrer',  (req, res) => {
        if (err) return console.log(err)
     // renders index.ejs
     // affiche le contenu de la BD
-    res.render('index.ejs', {adresse: resultat})
-
+    //res.render('index.ejs', {adresse: resultat})
+    res.redirect('/');
     }) 
   }) 
 })
