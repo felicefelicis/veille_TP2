@@ -29,7 +29,7 @@ app.get('/',  (req, res) => {
        if (err) return console.log(err)
     // renders index.ejs
     // affiche le contenu de la BD
-    res.render('index.ejs', {adresse: resultat})
+    res.render('index_tp2.ejs', {adresse: resultat})
 
     }) 
 })
@@ -67,7 +67,8 @@ app.get('/modifier',  (req, res) => {
     // renders index.ejs
     // affiche le contenu de la BD
     console.log(req.url.slice(-1));
-    res.render('index1.ejs', {adresse: resultat, id:req.url.slice(-1)})
+    res.redirect('/');
+    //res.render('index1.ejs', {adresse: resultat, id:req.url.slice(-1)})
     }) 
 })
 
