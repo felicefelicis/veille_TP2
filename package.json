@@ -4,6 +4,8 @@
   "description": "",
   "main": "01_apps_intro.js",
   "scripts": {
+    "start:mongo": "mongod --dbpath ./public/data",
+    "start:server": "node tp2.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +19,9 @@
   },
   "homepage": "https://github.com/eddypmartin/veille-express-mongodb#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "ejs": "^2.5.6",
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "mongodb": "^2.2.24"
   }
 }
