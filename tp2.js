@@ -12,7 +12,7 @@ var db; // variable qui contiendra le lien sur la BD
 
 app.set('view engine', 'ejs'); // générateur de template «ejs»
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 /*
 request handler = middleware fonction.  quand serveur recoit une requete cette fonction est chillbill.  
@@ -66,38 +66,36 @@ app.get('/detruire/:_id',  (req, res, next) => {
   }); 
 });
 
-app.get('/modifier',  (req, res, next) => {
+app.post('/modifier',  (req, res, next) => {
 
   //var nom = document.getElementById("nom").value;
-
-  var cursor = db.collection('adresse').find().toArray(function(err, resultat){
+  console.log("modifier_1");
+  db.collection('adresse').find().toArray(function(err, resultat){
+    console.log("modifier_2");
     if(err) return next(err);
+    console.log("modifier_3");
     // renders index.ejs
     // affiche le contenu de la BD
     console.log(req.url.slice(-1));
     res.redirect('/');
     //res.render('index1.ejs', {adresse: resultat, id:req.url.slice(-1)})
-  }) 
-})
+  }); 
+});
 
 app.post('/enregistrer',  (req, res, next) => {
-
+  console.log(req.body);
   const newRecord = {
-    'nom': req.body.nom, 
-    'prenom': req.body.prenom, 
-    'telephone': req.body.telephone, 
-    'ville': req.body.ville, 
-    'codepostal': req.body.codepostal
+    'nom': req.body.modif.nom, 
+    'prenom': req.body.modif.prenom, 
+    'telephone': req.body.modif.telephone
   };
 
   db.collection('adresse').update({_id:ObjectId(req.body._id)},{$set:newRecord}, (err, resultat) => {
     if(err) return next(err);
     var cursor = db.collection('adresse').find().toArray(function(err, resultat){
       if(err) return next(err);
-      // renders index.ejs
       // affiche le contenu de la BD
-      //res.render('index.ejs', {adresse: resultat})
-      res.redirect('/');
+      res.sendStatus(200);
     }) 
   }) 
 })

@@ -8,7 +8,45 @@
   <script src="https://use.fontawesome.com/554fe70f22.js"></script>
   <script type="text/javascript">
       function update(element) {
-        console.log(element);
+        var parent = element.parentElement;
+        var nom = parent.children[0].innerHTML;
+        var prenom = parent.children[1].innerHTML;
+        var telephone = parent.children[2].innerHTML;
+        var id = parent.children[3].innerHTML;
+
+        console.log("nom: ", nom);
+        console.log("prenom: ", prenom);
+        console.log("telephone: ", telephone);
+        console.log("id: ", id);
+
+        xhr = new XMLHttpRequest();
+
+        xhr.addEventListener("readystatechange", event => {
+          console.log("xhr.readyState = " + xhr.readyState)
+          console.log("xhr.status = " + xhr.status)
+
+          if(xhr.readyState == 4 && xhr.status == 200) {
+            console.log('ajax fonctionne')
+
+            var response = JSON.parse(xhr.responseText);
+
+            console.log(xhr.responseText);
+            element.style.backgroundColor = "#0f0"
+          }
+        });
+
+        xhr.open('POST', "enregistrer", true);
+        data = { 
+          "modif":{
+            "nom" : nom,
+            "prenom" : prenom,
+            "telephone" : telephone
+          },
+          "_id" : id 
+        }
+        sData = JSON.stringify(data);
+        xhr.setRequestHeader('Content-type', 'application/json');
+        xhr.send(sData);
       }
   </script>
 </head>
