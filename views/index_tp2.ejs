@@ -6,53 +6,11 @@
   <link rel="stylesheet" type="text/css" href="css/style_tp2.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
   <script src="https://use.fontawesome.com/554fe70f22.js"></script>
-  <script type="text/javascript">
-      function update(element) {
-        var parent = element.parentElement;
-        var nom = parent.children[0].innerHTML;
-        var prenom = parent.children[1].innerHTML;
-        var telephone = parent.children[2].innerHTML;
-        var id = parent.children[3].innerHTML;
-
-        console.log("nom: ", nom);
-        console.log("prenom: ", prenom);
-        console.log("telephone: ", telephone);
-        console.log("id: ", id);
-
-        xhr = new XMLHttpRequest();
-
-        xhr.addEventListener("readystatechange", event => {
-          console.log("xhr.readyState = " + xhr.readyState)
-          console.log("xhr.status = " + xhr.status)
-
-          if(xhr.readyState == 4 && xhr.status == 200) {
-            console.log('ajax fonctionne')
-
-            var response = JSON.parse(xhr.responseText);
-
-            console.log(xhr.responseText);
-            element.style.backgroundColor = "#0f0"
-          }
-        });
-
-        xhr.open('POST', "enregistrer", true);
-        data = { 
-          "modif":{
-            "nom" : nom,
-            "prenom" : prenom,
-            "telephone" : telephone
-          },
-          "_id" : id 
-        }
-        sData = JSON.stringify(data);
-        xhr.setRequestHeader('Content-type', 'application/json');
-        xhr.send(sData);
-      }
-  </script>
+  <script src="js/client.js"></script>
 </head>
 <body>
     <h1 id="titre">Carnet d'adresses des amis de Poudlard</h1>
-    <div class="container-fluid" style="margin-top: 10px">
+    <div class="container-fluid" id="carnet" style="margin-top: 10px">
 
       <div class="table-row header">
         <div class="text">Nom</div>
@@ -60,7 +18,7 @@
         <div class="text">Téléphone</div>
         <div class="text">_id</div>
         <div class="num"></div>
-        <i class="num fa fa-plus" aria-hidden="true"></i>
+        <i class="num fa fa-plus" aria-hidden="true" onclick="ajout()"></i>
       </div>
       <% for(var i=0; i<adresse.length; i++) {%>
       <div class="table-row">
@@ -68,10 +26,11 @@
         <div class="text modifiable" value="" contentEditable="true"><%= adresse[i].prenom %></div>
         <div class="text modifiable" value="" contentEditable="true"><%= adresse[i].telephone %></div>
         <div class="text" value=""><%= adresse[i]._id %></div>
-        <i class="num fa fa-floppy-o" aria-hidden="true" onclick="update(this)"></i>
-        <i class="num fa fa-trash-o" aria-hidden="true"></i>
+        <i class="num fa fa-floppy-o" aria-hidden="true" onclick="createOrUpdate(this)"></i>
+        <i class="num fa fa-trash-o" aria-hidden="true" onclick="detruire(this)"></i>
       </div>
       <% } %>
     </div>
+    <i class="num fa fa-plus add" aria-hidden="true" onclick="ajout()"></i>
 </body>
 </html>

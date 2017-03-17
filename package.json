@@ -4,8 +4,8 @@
   "description": "",
   "main": "01_apps_intro.js",
   "scripts": {
-    "start:mongo": "mongod --dbpath ./public/data",
-    "start:server": "node tp2.js",
+    "mongod": "mongod --dbpath ./public/data",
+    "start": "node tp2.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -44,46 +44,27 @@ app.get('/',  (req, res, next) => {
     }) 
 })
 
-// va chercher le form de la collection adresse et enregistre le contenu de la bdd qui redirrige a l'affichage
-app.post('/adresse',  (req, res, next) => {
-  db.collection('adresse').save(req.body, (err, result) => {
-      if(err) return next(err);
-      console.log('sauvegarder dans la BD');
-      res.redirect('/');
-    });
-});
-
-
-app.get('/detruire/:_id',  (req, res, next) => {
+app.post('/detruire/:_id',  (req, res, next) => {
   db.collection('adresse').findOneAndDelete({_id:ObjectId(req.params._id)}, (err, resultat) => {
     if(err) return next(err);
-    var cursor = db.collection('adresse').find().toArray(function(err, resultat){
-      if(err) return next(err);
-      // renders index.ejs
-      // affiche le contenu de la BD
-      res.redirect('/');
-    }); 
-  }); 
-});
-
-app.post('/modifier',  (req, res, next) => {
-
-  //var nom = document.getElementById("nom").value;
-  console.log("modifier_1");
-  db.collection('adresse').find().toArray(function(err, resultat){
-    console.log("modifier_2");
-    if(err) return next(err);
-    console.log("modifier_3");
-    // renders index.ejs
-    // affiche le contenu de la BD
-    console.log(req.url.slice(-1));
-    res.redirect('/');
-    //res.render('index1.ejs', {adresse: resultat, id:req.url.slice(-1)})
+    res.sendStatus(200);
   }); 
 });
 
 app.post('/enregistrer',  (req, res, next) => {
-  console.log(req.body);
+  const newRecord = {
+    'nom': req.body.create.nom, 
+    'prenom': req.body.create.prenom, 
+    'telephone': req.body.create.telephone
+  };
+
+  db.collection('adresse').insertOne(newRecord, (err, resultat) => {
+    if(err) return next(err);
+    res.send({ "id": resultat.insertedId });
+  }); 
+});
+
+app.post('/modifier',  (req, res, next) => {
   const newRecord = {
     'nom': req.body.modif.nom, 
     'prenom': req.body.modif.prenom, 
@@ -92,10 +73,6 @@ app.post('/enregistrer',  (req, res, next) => {
 
   db.collection('adresse').update({_id:ObjectId(req.body._id)},{$set:newRecord}, (err, resultat) => {
     if(err) return next(err);
-    var cursor = db.collection('adresse').find().toArray(function(err, resultat){
-      if(err) return next(err);
-      // affiche le contenu de la BD
-      res.sendStatus(200);
-    }) 
-  }) 
-})
+    res.sendStatus(200);
+  }); 
+});
